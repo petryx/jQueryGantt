@@ -705,7 +705,7 @@ jQuery.fn.createErrorAlert = function(errorCode, message) {
       var err = "<img width='17' heigh='17' id=\"" + el.attr("id") + "error\" error='1'";
       err += " onclick=\"alert($(this).attr('title'))\" border='0' align='absmiddle'>";
       err=$(err);
-      err.attr("title",errMess).attr("src",skinImgPath+"alert.gif");
+      err.attr("title",errMess).attr("src","res/alert.gif");
       el.after(err);
     }
   });
@@ -863,7 +863,7 @@ function openBlackPopup(url,width,height,onCloseCallBack,iframeId){
   bg.find("iframe:first").attr("src",url).css({width:width, height:height,top:100,border:'8px solid #909090', backgroundColor:'#ffffff'});
 
   var bdiv= $("<div>").css({width:width,position:"relative",height:"5px", textAlign:"right", margin:"auto" });
-  bdiv.append("<img src=\"closeBig.png\" style='cursor:pointer;position:absolute;right:-40px;top:30px;'>");
+  bdiv.append("<img src=\"res/closeBig.png\" style='cursor:pointer;position:absolute;right:-40px;top:30px;'>");
   bdiv.find("img:first").click( function(){
     bg.trigger("close");
 
@@ -876,23 +876,20 @@ function openBlackPopup(url,width,height,onCloseCallBack,iframeId){
 
 //returns a jquery object where to write content
 function createBlackPage(width,height,onCloseCallBack){
-  if (!width)
-    width='900px';
-  if (!height)
-    height='730px';
-
+  var width = $(window).width() * 0.4;
+  var height = $(window).height() * 0.7;
   $("#__blackpopup__").remove();
 
   var bg=$("<div>").attr("id","__blackpopup__");
-  bg.css({position:'fixed',top:"0px",paddingTop:"50px", left:0,width:'100%',height:'100%',  backgroundImage:"url('/applications/teamwork/images/black_70.png')"});
+  bg.css({"margin": "0", "position": "absolute","top": "10%","left": "50%","margin-right": "-50%","transform": "translate(-50%, -10%)", backgroundImage:"url('res/img/black_70.png')"});
   bg.append("<div id='bwinPopupd' name='bwinPopupd'></div>");
   bg.bringToFront();
 
   var ret=bg.find("#bwinPopupd");
-  ret.css({width:width, height:height,top:10, "-moz-box-shadow":'1px 1px 6px #333333',overflow:'auto',"-webkit-box-shadow":'1px 1px 6px #333333', border:'8px solid #777', backgroundColor:"#fff", margin:"auto" });
+  ret.css({top:10, "-moz-box-shadow":'1px 1px 6px #333333',overflow:'auto',"-webkit-box-shadow":'1px 1px 6px #333333', border:'8px solid #777', backgroundColor:"#fff", margin:"auto" });
 
-  var bdiv= $("<div>").css({width:width,position:"relative",height:"0px", textAlign:"right", margin:"auto" });
-  var img=$("<img src='closeBig.png' style='cursor:pointer;position:absolute;right:-40px;top:5px;' title='close'>");
+  var bdiv= $("<div>").css({position:"relative", margin:"auto" });
+  var img=$("<img src='res/closeBig.png' style='cursor:pointer;position:absolute;right:-40px;top:5px;' title='close'>");
   bdiv.append(img);
   img.click( function(){
     bg.trigger("close");
